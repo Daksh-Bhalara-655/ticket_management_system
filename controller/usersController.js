@@ -1,6 +1,7 @@
 const User = require('../Models/User');
 const Role = require('../Models/Role');
 
+
 async function createUser(req, res) {
   const { name, email, password, role } = req.body || {};
   if (!name || !email || !password || !role) return res.status(400).json({ message: 'Missing fields' });
@@ -14,6 +15,7 @@ async function createUser(req, res) {
     return res.status(400).json({ message: err.message });
   }
 }
+
 
 async function listUsers(req, res) {
   const users = await User.find().populate('role', 'name').select('-password');
